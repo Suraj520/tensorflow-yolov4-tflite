@@ -166,3 +166,80 @@ The training performance is not fully reproduced yet, so I recommended to use Al
    My project is inspired by these previous fantastic YOLOv3 implementations:
   * [Yolov3 tensorflow](https://github.com/YunYang1994/tensorflow-yolov3)
   * [Yolov3 tf2](https://github.com/zzh8829/yolov3-tf2)
+  
+  ## Personal Notes
+  ```
+  ##DetectorActivity.java
+Front camera switch
+//camera x: set camera facing mode //in that project easy
+//Camera activity java: Camera 2 api ..
+
+Model parameters change::
+DetectorActivity.java :: 
+https://kwagjj.wordpress.com/2017/10/02/tensorflow-android-detector-example-study/
+
+//Might affect accuracy..
+    private static final boolean MAINTAIN_ASPECT = false;
+    private static final Size DESIRED_PREVIEW_SIZE = new Size(640, 480);
+
+//
+    private static final boolean SAVE_PREVIEW_BITMAP = false;
+    private static final float TEXT_SIZE_DIP = 10; //label's size .. for removal
+
+//Layer over preview over which BBOx is drawn , In android render layer is different from drawing view
+OverlayView trackingOverlay;
+
+//Mobile rotation :: Landscape or po
+ private Integer sensorOrientation;
+
+//frames drop, by def it is false, whenever frame comes it is set to true
+private boolean computingDetection = false;
+
+//Matrix is used in Android graphics package:: translate preview
+ private Matrix frameToCropTransform;
+    private Matrix cropToFrameTransform;
+
+
+//when you create preview in camera activity, this has to be called.
+ public void onPreviewSizeChosen(final Size size, final int rotation) {
+
+//frames drop if not processed:
+//in Computing detection class, redirect the dropped frames into tracker thread.
+(computingDetection)
+
+//By default UI thread(main thread in python). If heavy computation is there then we do it on a worker thread.
+ runInBackground()
+
+final List<Classifier.Recognition> mappedRecognitions 
+//Maps the predicted boxes to canvas
+cropToFrameTransform.mapRect(location);
+//It is foreground thread
+runOnUiThread(
+
+//equivalent to time.time() start= system.currenttimeinmillis(), after block of code end = system.currenttimeinmillis()
+
+
+//kotlin :: python's syntax :: Android python's syntax , Camera X is a wrapper above Camera 2 api :: Kotlin
+//Kotlin works in Android (Youtube videos)
+
+// Which detection model to use: by default uses Tensorflow Object Detection API frozen
+// checkpoints.
+private enum DetectorMode {
+      TF_OD_API;
+    }
+
+// NN Api :: similarly for GPU delegate
+@Override
+protected void setUseNNAPI(final boolean isChecked) {
+     runInBackground(() -> detector.setUseNNAPI(isChecked));
+    }
+
+
+##MainActivity.java
+//First forked process in Android. from os to app transition this starts
+//OnCreate() method is first called.
+
+//To read mp4 from filestorage, create a function inside on create and read
+//MainActivity.xml :: defines widgets and location along with layout //drag and drop a buttonb
+```
+
